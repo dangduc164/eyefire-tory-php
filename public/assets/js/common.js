@@ -72,5 +72,13 @@ $(document).scroll(function() {
 const select = document.querySelector('#contact_purpose select');
 
 select.addEventListener('change', () => {
-  select.style.color = '#0063AA';
+    select.style.color = '#0063AA';
 });
+
+
+//hiden alret submit
+const myTimeout = setTimeout(myGreeting, 2500);
+
+function myGreeting() {
+    document.getElementById("alert").style.display = 'none';
+}

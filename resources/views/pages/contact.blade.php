@@ -7,6 +7,15 @@
         <x-slot name="layoutContent">
             <!-- main content -->
             <main class="main-factory-contact">
+
+                {{-- thông báo --}}
+                @if (session('success'))
+                    <div class="alert alert-success add h4 text-white" id="alert" role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                {{-- end thông báo --}}
+
                 <section class="p-contact">
                     <div class="p-contact__main">
                         <div class="l-container">
@@ -21,19 +30,19 @@
                                         </p>
                                     </div>
                                     <div class="l-col__form item-sp">
-                                        <form action="">
+                                        <form method="POST" action="{{ route('contact-send') }}">
+                                            @csrf
                                             <div class="p-contact__form">
-                                                <input type="text" placeholder="Nguyễn Văn A">
+                                                <input type="text" name="fullname" placeholder="Nguyễn Văn A">
                                             </div>
                                             <div class="p-contact__form">
-                                                <input type="text" placeholder="Work email">
-                                            </div>
-
-                                            <div class="p-contact__form">
-                                                <input type="text" placeholder="Số điện thoại">
+                                                <input type="text" name="email" placeholder="Work email">
                                             </div>
                                             <div class="p-contact__form">
-                                                <input type="text" placeholder="Tiêu đề">
+                                                <input type="text" name="phone" placeholder="Số điện thoại">
+                                            </div>
+                                            <div class="p-contact__form">
+                                                <input type="text" name="title" placeholder="Tiêu đề">
                                             </div>
                                             <div class="p-contact__form">
                                                 <select name="" id="">
@@ -100,29 +109,30 @@
                                     </div>
                                 </div>
                                 <div class="l-col l-col__form item-pc">
-                                    <form action="">
+                                    <form id="contact-form" method="POST" action="{{ route('contact-send') }}">
+                                        @csrf
                                         <div class="p-contact__form">
-                                            <input type="text" placeholder="Nguyễn Văn A">
+                                            <input type="text" name="fullname" placeholder="Nguyễn Văn A">
                                         </div>
                                         <div class="p-contact__form">
-                                            <input type="text" placeholder="Work email">
+                                            <input type="text" name="email" placeholder="Work email">
                                         </div>
 
                                         <div class="p-contact__form">
-                                            <input type="text" placeholder="Số điện thoại">
+                                            <input type="text" name="phone" placeholder="Số điện thoại">
                                         </div>
                                         <div class="p-contact__form">
-                                            <input type="text" placeholder="Tiêu đề">
+                                            <input type="text" name="title" placeholder="Tiêu đề">
                                         </div>
                                         <div class="p-contact__form" id="contact_purpose">
-                                            <select name="" id="">
+                                            <select name="purpose" id="">
                                                 <option value="" disabled hidden selected>Mục đích liên hệ</option>
                                                 <option value="demo">demo 1</option>
                                                 <option value="demo">demo 2</option>
                                             </select>
                                         </div>
                                         <div class="p-contact__form">
-                                            <textarea name="" id="" cols="30" rows="10" placeholder="Nội dung liên hệ"></textarea>
+                                            <textarea name="description" id="" cols="30" rows="10" placeholder="Nội dung liên hệ"></textarea>
                                         </div>
                                         <div class="p-contact__form">
                                             <label class="filelabel">
@@ -130,12 +140,12 @@
                                                     <img src="./assets/img/common/icn_up-load-file.svg" alt="">
                                                     File đính kèm
                                                 </span>
-                                                <input class="FileUpload1" id="FileInput" name="booking_attachment"
+                                                <input class="FileUpload1" id="FileInput" name="file"
                                                     type="file" value="" />
                                             </label>
                                         </div>
                                         <div class="p-contact__form">
-                                            <button class="c-btn">Gửi thông tin</button>
+                                            <button type="submit" class="c-btn">Gửi thông tin</button>
                                         </div>
                                     </form>
                                 </div>
@@ -197,5 +207,6 @@
 @endsection
 
 @push('add-js')
-<script src="{{ asset('assets/js/contact.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('assets/js/contact.js') }}"></script>
 @endpush
