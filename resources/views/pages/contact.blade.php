@@ -10,9 +10,15 @@
 
                 {{-- thông báo --}}
                 @if (session('success'))
-                    <div class="alert alert-success add h4 text-white" id="alert" role="alert">
+                    <div class="alert alert-success position-absolute top-1 end-0 z-9999"  id="alert" role="alert">
                         {{ session('success') }}
-                    </div>
+                      </div>
+                @endif
+
+                @if (session('error'))
+                    <div class="alert alert-danger position-absolute top-1 end-0 z-9999"  id="alert" role="alert">
+                        {{ session('error') }}
+                      </div>
                 @endif
                 {{-- end thông báo --}}
 
@@ -61,7 +67,7 @@
                                                         <img src="./assets/img/common/icn_up-load-file.svg" alt="">
                                                         File đính kèm
                                                     </span>
-                                                    <input class="FileUpload1" id="FileInput" name="booking_attachment"
+                                                    <input class="FileUpload1" id="FileInput" name="file"
                                                         type="file" value="" />
                                                 </label>
                                             </div>
@@ -109,7 +115,7 @@
                                     </div>
                                 </div>
                                 <div class="l-col l-col__form item-pc">
-                                    <form id="contact-form" method="POST" action="{{ route('contact-send') }}">
+                                    <form id="contact-form" method="POST" action="{{ route('contact-send') }}" enctype="multipart/form-data">
                                         @csrf
                                         <div class="p-contact__form">
                                             <input type="text" name="fullname" placeholder="Nguyễn Văn A">

@@ -26,6 +26,7 @@ Auth::routes();
 Route::prefix('/dashboard')->group(function () {
     Route::get('/', [AdminHomeController::class, 'index'])->name('ds-home');
     Route::get('/contact', [AdminHomeController::class, 'contact'])->name('ds-contact');
+    Route::get('/contact/download/{id}', [AdminHomeController::class, 'downFile'])->name('ds-downfile');
 });
 
 Route::group(['middleware' => 'role'],function(){

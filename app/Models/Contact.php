@@ -29,4 +29,9 @@ class Contact extends Model
             throw $error;
         }
     }
+
+    public function getPathAttribute()
+    {
+        return storage_path('app/' . $this->file);
+    }
 }

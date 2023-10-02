@@ -3,7 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contact;
+use Faker\Core\File;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+use function Laravel\Prompts\table;
 
 class HomeController extends Controller
 {
@@ -29,6 +35,13 @@ class HomeController extends Controller
 
     public function contact()
     {
-        return view('admin.contact');
+        $contacts = DB::table('contacts')->get();
+        return view('admin.contact', compact('contacts'));
+    }
+
+    public function downFile($id)
+    {
+        $file = Contact::find($id);
+        return response()->download($file->getPathAttribute());
     }
 }
